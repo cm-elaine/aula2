@@ -1,0 +1,46 @@
+package atividade02;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class Estudante {
+	
+	private int matricula;
+	private List<Orientador> orientadores = new ArrayList<>();
+
+	public Estudante(int matricula) {
+		this.matricula = matricula;
+	}
+
+	public void adicionarOrientador(Orientador orientador) {
+		if(orientadores.size() >= 3) {
+			throw new LimiteOrientadorException ("Limite de orientadores atingido para o estudante: " + matricula);
+		}
+		
+		orientadores.add(orientador);
+	}
+	
+	
+	// Teste
+    public static void main(String[] args) {
+        try {
+            Estudante estudante = new Estudante(1);
+
+            Orientador orientador1 = new Orientador("Elaine");
+            Orientador orientador2 = new Orientador("Maria");
+            Orientador orientador3 = new Orientador("João");
+            Orientador orientador4 = new Orientador("Ana");
+
+            estudante.adicionarOrientador(orientador1);
+            estudante.adicionarOrientador(orientador2);
+            estudante.adicionarOrientador(orientador3);
+            estudante.adicionarOrientador(orientador4); // lançando a exceção
+
+        } catch (LimiteOrientadorException e) {
+            System.out.println("Exceção: " + e.getMessage());
+        }
+    }
+}
+
+
+
